@@ -12,9 +12,15 @@ protected:
 };
 TEST_F(FizzbuzzTest,WhenTalIsDivisibleBy3and5ThenFizzBuzzShouldBeReturned){
     //ARRANGE
+    int tal = 30;
+    char buffer[10];
     //ACT
+    calculateFizzBuzz(tal, buffer);
     //ASSERT
+    ASSERT_STREQ("FizzBuzz", buffer);
 }
+
+
 
 
 

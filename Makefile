@@ -4,6 +4,9 @@ DEPS=fizzbuzz.h
 CC=gcc
 CFLAGS=-Wall -Werror
 DEBUG?=1
+GTESTINCLUDE = gtest
+LIBGTEST = C:\msys64\mingw64\lib\libgtest_main.a C:\msys64\mingw64\lib\libgtest.a
+
 ifeq ($(DEBUG), 1)
 	CFLAGS += -g
 	OUTPUTDIR=bin/debug
@@ -30,5 +33,12 @@ clean:
 
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
+
+check.exe: fizzbuzztest.o fizzbuzz.o
+	g++ -o $@ $^ $(CFLAGS) -I $(GTESTINCLUDE)  $(LIBGTEST)
+
+test: check.exe
+	./check.exe
+
 
 .PHONY: clean
