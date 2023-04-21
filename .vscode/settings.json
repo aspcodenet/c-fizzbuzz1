@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\stefa\\source\\c\\fizzbuzz1",
+            "binaryPath": "c:\\Users\\stefa\\source\\c\\fizzbuzz1\\fizzbuzz-debug.exe",
+            "binaryArgs": []
+        }
+    ]
+}
