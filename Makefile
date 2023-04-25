@@ -1,5 +1,5 @@
 PROG=fizzbuzz.exe
-SOURCES=main.c fizzbuzz.c
+SOURCES=main.c fizzbuzz.c password.c
 DEPS=fizzbuzz.h
 CC=gcc
 CFLAGS=-Wall -Werror
@@ -34,7 +34,7 @@ clean:
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-check.exe: fizzbuzztest.o fizzbuzz.o
+check.exe: fizzbuzztest.o fizzbuzz.o password.o passwordtest.o
 	g++ -o $@ $^ $(CFLAGS) -I $(GTESTINCLUDE)  $(LIBGTEST)
 
 test: check.exe
