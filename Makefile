@@ -1,6 +1,6 @@
 PROG=fizzbuzz.exe
-SOURCES=main.c fizzbuzz.c password.c
-DEPS=fizzbuzz.h
+SOURCES=main.c fizzbuzz.c password.c fizzbuzztdd.c
+DEPS=fizzbuzz.h password.h fizzbuzztdd.h
 CC=gcc
 CFLAGS=-Wall -Werror
 DEBUG?=1
@@ -24,6 +24,7 @@ OBJS =  $(addprefix $(OUTPUTDIR)/,$(SOURCES:.c=.o))
 $(PROG): $(OUTPUTDIR) $(OBJS) 
 	$(CC) $(CFLAGS) -o $(PROG) $(OBJS)
 
+
 $(OUTPUTDIR)/%.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -o $@ -c $< 
 
@@ -34,7 +35,7 @@ clean:
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-check.exe: fizzbuzztest.o fizzbuzz.o password.o passwordtest.o
+check.exe: fizzbuzztest.o fizzbuzz.o password.o passwordtest.o fizzbuzztdd.o fizzbuzztddtest.o
 	g++ -o $@ $^ $(CFLAGS) -I $(GTESTINCLUDE)  $(LIBGTEST)
 
 test: check.exe
