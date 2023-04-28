@@ -1,5 +1,5 @@
 PROG=fizzbuzz.exe
-SOURCES=main.c fizzbuzz.c password.c fizzbuzztdd.c
+SOURCES=main.c fizzbuzz.c password.c fizzbuzztdd.c stringcalculator.c
 DEPS=fizzbuzz.h password.h fizzbuzztdd.h
 CC=gcc
 CFLAGS=-Wall -Werror
@@ -25,8 +25,14 @@ $(PROG): $(OUTPUTDIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $(PROG) $(OBJS)
 
 
+
+
 $(OUTPUTDIR)/%.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -o $@ -c $< 
+
+$(OUTPUTDIR)/%.o: %.cpp $(DEPS)
+	g++ -o $@ -c $< -I $(GTESTINCLUDE)
+
 
 clean:
 	@del /q "$(OUTPUTDIR)" 
@@ -35,11 +41,10 @@ clean:
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-check.exe: fizzbuzztest.o fizzbuzz.o password.o passwordtest.o fizzbuzztdd.o fizzbuzztddtest.o
+check.exe: $(OUTPUTDIR)/fizzbuzztest.o $(OUTPUTDIR)/fizzbuzz.o $(OUTPUTDIR)/password.o $(OUTPUTDIR)/passwordtest.o $(OUTPUTDIR)/fizzbuzztdd.o $(OUTPUTDIR)/fizzbuzztddtest.o $(OUTPUTDIR)/stringcalculator.o $(OUTPUTDIR)/stringcalculatortest.o
 	g++ -o $@ $^ $(CFLAGS) -I $(GTESTINCLUDE)  $(LIBGTEST)
 
 test: check.exe
 	./check.exe
-
 
 .PHONY: clean
